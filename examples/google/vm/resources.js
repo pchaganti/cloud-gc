@@ -64,7 +64,7 @@ exports.createResources = () => [
     group: "compute",
     properties: ({}) => ({
       name: "webserver",
-      machineType: "f1-micro",
+      machineType: "e2-micro",
       metadata: {
         items: [
           {
@@ -74,7 +74,7 @@ exports.createResources = () => [
         ],
       },
       sourceImage:
-        "projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20210927",
+        "projects/debian-cloud/global/images/debian-12-bookworm-v20240815",
     }),
     dependencies: ({}) => ({
       ip: "ip-webserver",

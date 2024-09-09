@@ -22,7 +22,7 @@ provider.compute.makeVmInstance({
   },
   properties: () => ({
     diskSizeGb: "20",
-    machineType: "f1-micro",
+    machineType: "e2-micro",
     sourceImage:
       "projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts",
     metadata: {

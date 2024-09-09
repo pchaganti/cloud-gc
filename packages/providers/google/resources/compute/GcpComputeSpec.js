@@ -260,6 +260,7 @@ module.exports = pipe([
         },
         startRestricted: false,
         deletionProtection: false,
+        satisfiesPzi: false,
         shieldedInstanceConfig: {
           enableSecureBoot: false,
           enableVtpm: true,

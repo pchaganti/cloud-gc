@@ -46,7 +46,7 @@ const createResources = () => [
     }),
     properties: () => ({
       diskSizeGb: "20",
-      machineType: "f1-micro",
+      machineType: "e2-micro",
     }),
   },
 ];
