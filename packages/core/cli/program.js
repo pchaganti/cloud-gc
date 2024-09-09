@@ -180,7 +180,7 @@ exports.createProgram = () => {
     .option(
       "-p, --profile <string>",
       "AWS only: The AWS profile",
-      process.env.AWS_PROFILE ?? "default"
+      process.env.AWS_PROFILE
     )
     .action(createProject({ programOptions: program.opts() }));
 

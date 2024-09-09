@@ -42,7 +42,7 @@ const {
   filterOut,
   uniq,
 } = require("rubico/x");
-const memoize = require("lodash/memoize");
+const memoize = require("lodash.memoize");
 const { EOL } = require("os");
 const logger = require("./logger")({ prefix: "CoreProvider" });
 const { tos } = require("./tos");
