@@ -20,7 +20,7 @@ const createResources = () => [
     name: "db-server",
     properties: () => ({
       diskSizeGb: "50",
-      machineType: "f1-micro",
+      machineType: "e2-micro",
     }),
   },
 ];

@@ -14,7 +14,7 @@ provider.compute.makeVmInstance({
   name: "web-server",
   properties: () => ({
     diskSizeGb: "20",
-    machineType: "f1-micro",
+    machineType: "e2-micro",
     sourceImage:
       "projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts",
     metadata: {
@@ -47,7 +47,7 @@ const server = provider.compute.makeVmInstance({
   dependencies: { ip: `ip-webserver` },
   properties: () => ({
     diskSizeGb: "20",
-    machineType: "f1-micro",
+    machineType: "e2-micro",
     sourceImage:
       "projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts",
     metadata: {
@@ -80,7 +80,7 @@ const server = provider.compute.makeVmInstance({
   dependencies: () => ({ serviceAccount: `sa-dev` }),
   properties: () => ({
     diskSizeGb: "20",
-    machineType: "f1-micro",
+    machineType: "e2-micro",
     sourceImage:
       "projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts",
     metadata: {
@@ -123,7 +123,7 @@ const server = provider.compute.makeVmInstance({
   dependencies: { ip },
   properties: () => ({
     diskSizeGb: "20",
-    machineType: "f1-micro",
+    machineType: "e2-micro",
     sourceImage:
       "projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts",
     metadata: {
@@ -145,7 +145,7 @@ const server = provider.compute.makeVmInstance({
   name: `webserver`,
   properties: () => ({
     diskSizeGb: "20",
-    machineType: "f1-micro",
+    machineType: "e2-micro",
     sourceImage:
       "projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts",
     metadata: {

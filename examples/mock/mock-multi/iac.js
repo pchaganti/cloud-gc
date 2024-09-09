@@ -9,7 +9,7 @@ const createResources1 = () => [
     name: "server",
     properties: () => ({
       diskSizeGb: "20",
-      machineType: "f1-micro",
+      machineType: "e2-micro",
     }),
     dependencies: () => ({
       volume: "volume2",

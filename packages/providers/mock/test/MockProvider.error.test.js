@@ -100,7 +100,7 @@ describe("MockProvider errors", async function () {
                   name: "web-server",
                   properties: () => ({
                     diskSizeGb: "20",
-                    machineType: "f1-micro",
+                    machineType: "e2-micro",
                   }),
                 },
                 { type: "Ip", group: "Compute", name: "myip" },

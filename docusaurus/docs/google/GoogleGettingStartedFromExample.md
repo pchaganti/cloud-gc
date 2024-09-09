@@ -154,7 +154,7 @@ module.exports = ({ stage }) => ({
     name: "web-server",
     properties: {
       diskSizeGb: "20",
-      machineType: "f1-micro",
+      machineType: "e2-micro",
       sourceImage:
         "projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts",
       metadata: {
@@ -452,7 +452,7 @@ gc info
         name: web-server
         properties:
           diskSizeGb: 20
-          machineType: f1-micro
+          machineType: e2-micro
           sourceImage: projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts
           metadata:
             items:
@@ -621,7 +621,7 @@ gcloud compute instances list --project vm-tuto1
 
 ```txt
 NAME        ZONE                  MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
-web-server  southamerica-east1-b  f1-micro                   10.158.0.4   35.198.52.62  RUNNING
+web-server  southamerica-east1-b  e2-micro                   10.158.0.4   35.198.52.62  RUNNING
 ```
 
 Does the machine responds our ping request ?
@@ -866,7 +866,7 @@ Querying resources on 1 provider: google
 │ ├─────────────────────────────────────────────────────────────────────────────────────────┤  │
 │ │ Key: machineType                                                                        │  │
 │ ├────────────────────────────────────────────┬────────────────────────────────────────────┤  │
-│ │ - f1-micro                                 │ + f2-micro                                 │  │
+│ │ - e2-micro                                 │ + f2-micro                                 │  │
 │ └────────────────────────────────────────────┴────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────────────────────────────────────────┘
 

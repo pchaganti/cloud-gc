@@ -70,7 +70,7 @@ Query Plan for mock
 ├────────────┼──────────┼────────────────────────────────────────────────────────────────────────────────┤
 │ web-server │ CREATE   │ name: web-server                                                               │
 │            │          │ zone: projects/undefined/zones/undefined                                       │
-│            │          │ machineType: projects/undefined/zones/undefined/machineTypes/f1-micro          │
+│            │          │ machineType: projects/undefined/zones/undefined/machineTypes/e2-micro          │
 │            │          │ tags:                                                                          │
 │            │          │   items:                                                                       │
 │            │          │     - "web-serverManagedByGru"                                                 │
