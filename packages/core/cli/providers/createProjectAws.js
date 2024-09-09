@@ -27,7 +27,6 @@ const { execCommandShell, myPrompts } = require("./createProjectCommon");
 const createConfig = ({ profile, partition }) =>
   pipe([
     tap(() => {
-      assert(profile);
       assert(partition);
     }),
     () => `const pkg = require("./package.json");
@@ -49,6 +48,12 @@ const PARTITIONS = [
   { title: "aws-us-gov", description: "AWS US GovCloud" },
   { title: "aws-cn", description: " AWS China." },
 ];
+
+const buildProfileOption = switchCase([
+  isEmpty,
+  () => "",
+  (profile) => `--profile ${profile}`,
+]);
 
 const awsExecCommand =
   ({ displayText, textEnd } = {}) =>
@@ -126,15 +131,11 @@ const initialRegionIndex = ({ currentRegion, regions }) =>
   ])();
 
 const promptProfile = pipe([
-  tap(({ profile }) => {
-    assert(profile);
-  }),
-  ({ profile }) => ({
+  ({ profile = "" }) => ({
     type: "text",
     name: "profile",
     message: "The AWS profile",
     initial: profile,
-    validate: (profile) => (isEmpty(profile) ? `should not be empty` : true),
   }),
   myPrompts,
   get("profile"),
@@ -165,7 +166,9 @@ const promptRegion = pipe([
   assign({
     regions: pipe([
       ({ profile, regionMain }) =>
-        `ec2 describe-regions --region ${regionMain} --profile ${profile}`,
+        `ec2 describe-regions --region ${regionMain} ${buildProfileOption(
+          profile
+        )}`,
       awsExecCommand(),
       get("Regions"),
     ]),
@@ -173,7 +176,7 @@ const promptRegion = pipe([
   assign({
     currentRegion: tryCatch(
       pipe([
-        ({ profile }) => `configure get region --profile ${profile}`,
+        ({ profile }) => `configure get region ${buildProfileOption(profile)}`,
         awsExecCommand(),
         callProp("replace", EOL, ""),
         when(includes("undefined"), () => undefined),
@@ -209,14 +212,16 @@ const promptRegion = pipe([
         isEmpty,
         tap((region) =>
           pipe([
-            () => `configure set region ${region} --profile ${profile}`,
+            () =>
+              `configure set region ${region} ${buildProfileOption(profile)}`,
             awsExecCommand(),
           ])()
         )
       ),
     ])(),
 ]);
-const execAwsConfigure = ({ profile = "default" }) =>
+
+const execAwsConfigure = ({ profile = "" }) =>
   pipe([
     tap((params) => {
       console.log(
@@ -248,20 +253,29 @@ const execAwsConfigure = ({ profile = "default" }) =>
           assert(AWSSecretKey);
         }),
         () =>
-          `configure set aws_access_key_id ${AWSAccessKeyId} --profile ${profile}`,
+          `configure set aws_access_key_id ${AWSAccessKeyId} ${buildProfileOption(
+            profile
+          )}`,
         awsExecCommand(),
         () =>
-          `configure set aws_secret_access_key ${AWSSecretKey} --profile ${profile}`,
+          `configure set aws_secret_access_key ${AWSSecretKey} ${buildProfileOption(
+            profile
+          )}`,
         awsExecCommand({
-          displayText: `aws configure set aws_secret_access_key XXXXXXXXXXXXXXX --profile ${profile}`,
+          displayText: `aws configure set aws_secret_access_key XXXXXXXXXXXXXXX ${buildProfileOption(
+            profile
+          )}`,
         }),
       ])()
     ),
   ]);
 
-const isAuthenticated = ({ profile = "default", regionMain = "us-east-1" }) =>
+const isAuthenticated = ({ profile = "", regionMain = "us-east-1" }) =>
   pipe([
-    () => `sts get-caller-identity --region ${regionMain} --profile ${profile}`,
+    () =>
+      `sts get-caller-identity --region ${regionMain} ${buildProfileOption(
+        profile
+      )}`,
     tryCatch(
       pipe([
         awsExecCommand({
@@ -304,7 +318,6 @@ exports.createProjectAws = ({}) =>
           `Initializing AWS provider in directory: ${dirs.providerDirectory}`
         );
     }),
-
     tap(isAwsPresent),
     assign({ partition: promptPartition }),
     assign({
